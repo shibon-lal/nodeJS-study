@@ -1,0 +1,55 @@
+<html>
+
+<head>
+	<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+	<!------ Include the above in your HEAD tag ---------->
+
+	<link href='http://fonts.googleapis.com/css?family=Raleway:400,200' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="/css/signup.css">
+</head>
+
+<body>
+	<div class="container">
+		<div class="row login_box">
+			<div class="col-md-12 col-xs-12" align="center">
+				<div class="line">
+					<h3>
+						<%= timenow %>
+					</h3>
+				</div>
+				<div class="outter"><img src="http://lorempixel.com/output/people-q-c-100-100-1.jpg" class="image-circle" /></div>
+				<h1>Hi Guest</h1>
+			</div>
+			<form method="post" action="/postlogin">
+				<div class="col-md-12 col-xs-12 login_control">
+					<div class="control">
+					<% if(hasErrors) { %>
+					<div class="alert alert-danger">
+					<% _.forEach(messages, function(error) {  %>
+					<%= error %>
+						<br>
+					<% }) %>
+					</div>
+					<% } %>
+					</div>
+					<div class="control">
+						<div class="label">Email Address</div>
+						<input type="text" class="form-control" name="email" value="" />
+					</div>
+					<div class="control">
+						<div class="label">Password</div>
+						<input type="password" class="form-control" name="password" value="" />
+					</div>
+					<div align="center">
+						<a href="/signup" class="btn btn-orange" style="color: #f3eeee;">REGISTER</a>
+						<button class="btn btn-orange">LOGIN</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+
+</html>
