@@ -1,0 +1,64 @@
+<div id="file-uploader" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Event Image</h4>
+      </div>
+      <div class="modal-body">
+        <div>
+          <img src="" id="previewImage">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Update</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<style type="text/css">
+  .cropper-crop-box {
+    width: 640px !important;
+    height: 480px !important;
+  }
+</style>
+<script type="text/javascript">
+  $(function () {
+    var $image = $("#previewImage");
+    var $input = $("[name='event_img_enc']");
+
+    $("input:file").change(function () {
+      // Destroy the old cropper instance
+      $image.cropper('destroy');
+      $('#file-uploader').modal('show');
+      var oFReader = new FileReader();
+
+      oFReader.readAsDataURL(this.files[0]);
+
+      oFReader.onload = function (oFREvent) {
+        // Replace url
+        $image.attr('src', this.result);
+        // Start cropper
+        $image.cropper({
+          // aspectRatio: 1,
+          movable: true,
+          zoomable: false,
+          rotatable: false,
+          scalable: false,
+          cropBoxResizable: false,
+          dragMode: 'move',
+          minContainerWidth: 800,
+          minContainerHeight: 600,
+          crop: function (e) {
+            var datas = $image.cropper('getCroppedCanvas').toDataURL();
+            $("#event_img_enc").val(datas);
+            $(".edit-event-img").attr('src', datas);
+          }
+        });
+      };
+    });
+  });
+</script>
